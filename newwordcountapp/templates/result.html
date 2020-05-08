@@ -1,0 +1,77 @@
+<style>
+    @font-face { font-family: 'LotteMartHappy'; font-style: normal; font-weight: 400; src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyMedium.woff') format('woff'); } @font-face { font-family: 'LotteMartHappy'; font-style: normal; font-weight: 700; src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyBold.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartHappy/LotteMartHappyBold.woff') format('woff'); } .lottemarthappy * { font-family: 'LotteMartHappy', sans-serif; }
+
+    body{
+        font-family: 'LotteMartHappy';
+    }
+    #totalCnt{
+        color: orangered;
+        font-weight: bold;
+        font-size: 50px;
+    }
+    a{
+        font-size: 30pt;
+        font-weight: bold;
+    }
+    #enterText{
+        font-weight: bold;
+        color: orangered;
+    }
+    table{
+        border: solid 1px black;
+        text-align: center;
+        width: 250px;
+    }
+    th, tr, td{
+        border: 1px solid black;
+    }
+    th{
+        background-color: palegreen;
+    }
+    td{
+        background-color: papayawhip;
+    }
+
+    div{
+        display:inline-block;
+        background-color:aquamarine;
+    }
+</style>
+
+<body align="center">
+    <br><br>
+    <h1>당신이 입력한 텍스트는<br>
+         <!-- 총 단어 수 --><span id="totalCnt">{{total}}</span>로 구성되어 있습니다.</h1>
+
+    <a href="{%url 'home'%}">다시 하기</a>
+
+    <br><br>
+    <h2>입력한 텍스트 : </h2>
+    <!-- 입력받은 전체 텍스트 -->
+    <h2 id="enterText">{{full}}</h2>
+
+    <table class="cnt" align="center">
+        <tr>
+            <th colspan="2"><h2>단어 카운트</h2></th>
+        </tr>
+        <!-- '단어' - '단어가 나온 횟수' -->
+        <!-- {{dictionary}} -->
+        {% for word, howmany in dictionary %} <!-- 제어변수가 word, howmany 2개인거임 -->
+        <tr>
+            <td>{{word}} </td> <td> {{howmany}}</td>
+            <br>
+        </tr>
+        {%endfor%}
+    </table>
+
+    <br><br><br>
+
+    <div>
+        <h2>중복된 단어</h2>
+        {% for wordD, manyD in duplication %}
+            {%if manyD != 0%}
+                {{wordD}}<br>
+            {%endif%}
+        {%endfor%}
+    </div>
+</body>
